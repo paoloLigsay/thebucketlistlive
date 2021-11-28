@@ -1,0 +1,451 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@700&family=Outfit:wght@400;500&display=swap');
+/* mixins */
+@mixin sp {
+  @media screen and (max-width: 1000px) {
+    @content;
+  }
+}
+
+/* colors */
+
+$main: #4286f5;
+$hovered: #3267bb;
+$white: #fff;
+$green: #13e2c0;
+$green-hovered: #00dab5;
+
+/* reset and global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  font-family: 'Outfit', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+html,
+body {
+  font-size: 10px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    // background-color: $background;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // background-color: $main;
+  }
+}
+
+.App {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sp-only {
+  display: none;
+  @include sp {
+    display: block;
+  }
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include sp {
+    padding: 10%;
+    justify-content: flex-start;
+  }
+
+  h1 {
+    color: $main;
+    font-size: 5rem;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 50px;
+  }
+
+  &__mainvisual {
+    width: 50%;
+    height: auto;
+
+    @include sp {
+      display: none;
+    }
+  }
+
+  &__container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    @include sp {
+      width: 100%;
+    }
+
+    input {
+      width: 60%;
+      height: 35px;
+      margin: 3px 0;
+      padding: 5px;
+      border: 0.3px solid #666666;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      position: relative;
+      margin-top: 15px;
+      width: 35%;
+      height: 35px;
+      border: 1px solid $main;
+      background-color: transparent;
+      color: $white;
+      cursor: pointer;
+      transition: all 300ms ease;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        width: 100%;
+        height: 35px;
+        background-color: $main;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transition: all 300ms ease;
+      }
+
+      &::before {
+        content: '';
+        width: 100%;
+        height: 35px;
+        background-color: $hovered;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: -2;
+        transition: all 300ms ease;
+        transition-delay: 300ms;
+      }
+
+      &:hover {
+        border-color: $hovered;
+
+        &::after {
+          left: 100%;
+        }
+
+        &::before {
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+.Bucketlist {
+  padding: 3%;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+
+  &__flex-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-size: 2.5rem;
+      color: $main;
+    }
+  }
+
+  &__svg {
+    width: 50%;
+    height: auto;
+
+    @include sp {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__no-item-container {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 2rem;
+
+      @include sp {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  &__logout {
+    cursor: pointer;
+    width: 10vw;
+    height: 30px;
+    background-color: $main;
+    border: 1px solid $main;
+    color: $white;
+    outline: none;
+    transition: all 300ms ease;
+
+    @include sp {
+      margin: 10px;
+      width: 35vw;
+    }
+
+    &:hover {
+      background-color: $hovered;
+    }
+  }
+
+  &__button {
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    background-color: $green;
+    border: 1px solid $green;
+    color: $white;
+    outline: none;
+    transition: all 300ms ease;
+
+    &:hover {
+      border-color: $green-hovered;
+      background-color: $green-hovered;
+    }
+  }
+
+  &__list {
+    height: 90%;
+    width: 100%;
+    margin: 25px 0;
+    overflow: hidden scroll;
+    padding: 0 2%;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background-color: $white;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: $green;
+    }
+  }
+
+  &__item {
+    cursor: pointer;
+    position: relative;
+    box-shadow: 2px 2px 25px -15px #5f5f5f;
+    margin: 15px 0;
+    padding: 5%;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 300ms ease;
+
+    &:nth-of-type(1) {
+      margin-top: 0;
+    }
+
+    &:hover {
+      margin-left: 5px;
+
+      @include sp {
+        margin-left: 0;
+      }
+    }
+
+    span {
+      cursor: pointer;
+      font-size: 1.8rem;
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      transition: all 300ms ease;
+
+      &:hover {
+        color: $green;
+      }
+    }
+
+    &-done {
+      font-size: 1rem;
+      padding: 3px 0;
+      width: 70px;
+      background-color: $green;
+      display: flex;
+      justify-content: center;
+      color: $white;
+      border-radius: 40px;
+      transition: all 300ms ease;
+      margin-bottom: 0;
+      opacity: 0;
+      visibility: hidden;
+
+      @include sp {
+        height: 0;
+      }
+
+      &--active {
+        margin-bottom: 15px;
+        opacity: 1;
+        visibility: visible;
+
+        @include sp {
+          height: 20px;
+        }
+      }
+
+      @include sp {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 2.5rem;
+
+    @include sp {
+      font-size: 2rem; 
+    }
+  }
+
+  &__description {
+    font-size: 1.5rem;
+    word-wrap: break-word;
+  }
+
+  &__logout {
+    align-self: flex-end;
+  }
+
+  &__add-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    width: 50%;
+    height: 350px;
+    background-color: $white;
+    position: fixed;
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%, 50%);
+
+    @include sp {
+      width: 90%;
+    }
+
+    &-fade {
+      position: absolute;
+      width: 100vw;
+      height: 200vh;
+      left: 0;
+      top: -100%;
+      background-color: #3f3f3f;
+      opacity: 0;
+      visibility: hidden;
+
+      &--active {
+        opacity: 0.8;
+        visibility: visible;
+      }
+    }
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    span {
+      cursor: pointer;
+      font-size: 1.5rem;
+      position: absolute;
+      top: 7%;
+      right: 8%;
+      transition: all 300ms ease;
+
+      &:hover {
+        color: $green;
+      }
+    }
+
+    input {
+      border: 0.5px solid rgb(105, 105, 105);
+      width: 75%;
+      height: 45px;
+      margin: 5px 0;
+      padding: 3%;
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 75%;
+      height: 45px;
+      cursor: pointer;
+      background-color: $green;
+      border: 1px solid $green;
+      color: $white;
+      outline: none;
+      transition: all 300ms ease;
+
+      &:hover {
+        background-color: $green-hovered;
+      }
+    }
+  }
+}
